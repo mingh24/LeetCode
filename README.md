@@ -1,4 +1,4 @@
-# Leet-Code
+# LeetCode
 
 Here is my record of LeetCode.
 
