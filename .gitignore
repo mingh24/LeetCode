@@ -8,4 +8,4 @@
 !*.java
 !*.py
 !*.sql
-*/cmake-build-debug
+cmake-build-debug
