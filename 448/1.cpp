@@ -19,6 +19,6 @@ public:
             }
         }
 
-        return nums;
+        return answer;
     }
 };
