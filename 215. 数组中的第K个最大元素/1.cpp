@@ -1,30 +1,30 @@
 class Solution {
 public:
     int findKthLargest(vector<int> &nums, int k) {
+        srand(time(0));
         vector<int> container(nums);
-        quickSort(container, 0, container.size() - 1);
 
-        return container[container.size() - k];
+        return quickSelect(container, 0, container.size() - 1, k);
     }
 
 private:
-    void quickSort(vector<int> &container, int start_index, int end_index) {
-        if (start_index >= end_index) {
-            return;
-        }
+    int quickSelect(vector<int> &container, int left, int right, int k) {
+        int pivot_index = partition(container, left, right);
 
-        int pivot_index = partition(container, start_index, end_index);
-        quickSort(container, start_index, pivot_index - 1);
-        quickSort(container, pivot_index + 1, end_index);
+        if (pivot_index == container.size() - k) {
+            return container[pivot_index];
+        } else if (pivot_index < container.size() - k) {
+            return quickSelect(container, pivot_index + 1, right, k);
+        } else {
+            return quickSelect(container, left, pivot_index - 1, k);
+        }
     }
 
-    int partition(vector<int> &container, int start_index, int end_index) {
-        int pivot_index = start_index + rand() % (end_index - start_index + 1);
+    int partition(vector<int> &container, int left, int right) {
+        int pivot_index = left + rand() % (right - left + 1);
         int pivot = container[pivot_index];
-        int left = start_index;
-        int right = end_index;
 
-        while (left != right) {
+        while (left < right) {
             while (left < right and container[right] > pivot) {
                 right--;
             }
@@ -34,13 +34,13 @@ private:
             }
 
             if (left < right) {
-                container[left] = container[left] ^ container[right];
-                container[right] = container[left] ^ container[right];
-                container[left] = container[left] ^ container[right];
+                container[left] ^= container[right];
+                container[right] ^= container[left];
+                container[left] ^= container[right];
 
-                if (left == pivot_index) {
+                if (pivot_index == left) {
                     pivot_index = right;
-                } else if (right == pivot_index) {
+                } else if (pivot_index == right) {
                     pivot_index = left;
                 }
             }
