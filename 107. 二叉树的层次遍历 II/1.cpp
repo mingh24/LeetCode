@@ -16,12 +16,12 @@ public:
             return answer;
         }
 
+        vector<int> layer;
         queue<TreeNode *> q;
         q.emplace(root);
 
         while (!q.empty()) {
             int size = q.size();
-            vector<int> layer;
 
             while (size--) {
                 TreeNode *node = q.front();
@@ -38,6 +38,7 @@ public:
             }
 
             answer.emplace_back(layer);
+            layer.clear();
         }
 
         reverse(answer.begin(), answer.end());
