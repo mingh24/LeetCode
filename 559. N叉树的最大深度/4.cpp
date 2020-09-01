@@ -26,13 +26,26 @@ public:
         }
 
         int answer = 0;
+        queue<Node *> q;
+        q.emplace(root);
 
-        for (Node *child : root->children) {
-            if (child) {
-                answer = max(answer, maxDepth(child));
+        while (!q.empty()) {
+            int size = q.size();
+
+            while (size--) {
+                Node *node = q.front();
+                q.pop();
+
+                for (Node *child : node->children) {
+                    if (child) {
+                        q.emplace(child);
+                    }
+                }
             }
+
+            answer++;
         }
 
-        return answer + 1;
+        return answer;
     }
 };
