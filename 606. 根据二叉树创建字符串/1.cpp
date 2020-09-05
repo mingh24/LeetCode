@@ -16,20 +16,12 @@ public:
 
         if (!t->left && !t->right) {
             return to_string(t->val);
+        } else if (t->left && !t->right) {
+            return to_string(t->val) + "(" + tree2str(t->left) + ")";
+        } else if (!t->left && t->right) {
+            return to_string(t->val) + "()" + "(" + tree2str(t->right) + ")";
         }
 
-        string answer = to_string(t->val);
-
-        if (t->left) {
-            answer += "(" + tree2str(t->left) + ")";
-        } else {
-            answer += "()";
-        }
-
-        if (t->right) {
-            answer += "(" + tree2str(t->right) + ")";
-        }
-
-        return answer;
+        return to_string(t->val) + "(" + tree2str(t->left) + ")" + "(" + tree2str(t->right) + ")";
     }
 };
