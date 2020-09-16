@@ -7,8 +7,6 @@ public:
             answer ^= ch;
         }
 
-        cout << answer << endl;
-
         for (char &ch : t) {
             answer ^= ch;
         }
