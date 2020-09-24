@@ -7,32 +7,18 @@ public:
             return answer;
         }
 
-        int min_length = INT_MAX;
         int size = strs.size();
+        int length = strs[0].size();
 
-        for (int i = 0; i < size; i++) {
-            min_length = min(min_length, (int)strs[i].size());
-        }
-
-        int common_length = 0;
-        bool dismatch = false;
-
-        for (int m = 0; m < min_length; m++) {
-            for (int n = 1; n < size; n++) {
-                if (strs[n][m] != strs[n - 1][m]) {
-                    dismatch = true;
-                    break;
+        for (int i = 0; i < length; i++) {
+            for (int j = 1; j < size; j++) {
+                if (i == strs[j].size() || strs[j][i] != strs[0][i]) {
+                    return answer;
                 }
             }
 
-            if (dismatch) {
-                break;
-            }
-
-            common_length++;
+            answer += strs[0][i];
         }
-
-        answer = strs[0].substr(0, common_length);
 
         return answer;
     }
