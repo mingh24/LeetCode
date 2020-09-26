@@ -10,35 +10,34 @@
 class Solution {
 public:
     vector<vector<int>> pathSum(TreeNode *root, int sum) {
+        vector<vector<int>> answer;
         vector<int> path;
-        dfs(root, path, sum);
+        dfs(root, sum, answer, path);
 
         return answer;
     }
 
 private:
-    vector<vector<int>> answer;
-
-    void dfs(TreeNode *node, vector<int> &path, int sum) {
-        if (!node) {
+    void dfs(TreeNode *root, int sum, vector<vector<int>> &answer, vector<int> &path) {
+        if (!root) {
             return;
         }
 
-        path.emplace_back(node->val);
-        sum -= node->val;
+        path.emplace_back(root->val);
+        sum -= root->val;
 
-        if (!node->left && !node->right && sum == 0) {
+        if (sum == 0 && !root->left && !root->right) {
             answer.emplace_back(path);
             path.pop_back();
             return;
         }
 
-        if (node->left) {
-            dfs(node->left, path, sum);
+        if (root->left) {
+            dfs(root->left, sum, answer, path);
         }
 
-        if (node->right) {
-            dfs(node->right, path, sum);
+        if (root->right) {
+            dfs(root->right, sum, answer, path);
         }
 
         path.pop_back();
