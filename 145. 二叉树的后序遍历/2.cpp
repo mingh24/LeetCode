@@ -4,7 +4,9 @@
  *     int val;
  *     TreeNode *left;
  *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution {
@@ -33,8 +35,21 @@ public:
             }
         }
 
-        reverse(answer.begin(), answer.end());
+        my_revere(answer, 0, answer.size());
 
         return answer;
+    }
+
+private:
+    void my_revere(vector<int> &answer, int begin, int end) {
+        if (begin < 0 || end > answer.size() || begin >= end) {
+            return;
+        }
+
+        for (int i = begin; i < (begin + end) / 2; i++) {
+            answer[i] ^= answer[end - 1 - i + begin];
+            answer[end - 1 - i + begin] ^= answer[i];
+            answer[i] ^= answer[end - 1 - i + begin];
+        }
     }
 };
