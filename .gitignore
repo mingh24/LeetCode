@@ -1,0 +1,13 @@
+*
+!.gitignore
+!*/
+!*.c
+!*.cpp
+!*.cxx
+!*.cc
+!*.java
+!*.py
+!*.sh
+!*.sql
+.history
+cmake-build-debug
