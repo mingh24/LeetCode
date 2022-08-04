@@ -5,6 +5,7 @@
 !*.cpp
 !*.cxx
 !*.cc
+!*.go
 !*.java
 !*.py
 !*.sh
